@@ -1,2 +1,3 @@
-FlaskChat/
-flask_session
+venv/
+.vscode/
+flask_session/
