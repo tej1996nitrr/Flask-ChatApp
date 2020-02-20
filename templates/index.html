@@ -1,5 +1,22 @@
 {% extends "prelogin-layout.html" %}
 {% block title %} Registration1 {% endblock %}
 {% block content %}
-<h1> ffGetting Started</h1>
+<form>
+        <div>
+            {{form.username( class_ = 'form-control',placeholder='Username',autocomplete='off',autofocus = true)}}
+        </div>
+        <div>
+            {{ form.password(class_ = 'form-control',placeholder = 'Password',autocomplete='off',autofocus = true )}}
+
+        </div>
+        {{ form.confirm_password(class_ = 'form-control',placeholder = 'Confirm Password',autocomplete='off',autofocus = true )}}
+
+        <div>
+
+        </div>
+        <div>
+        <input type="submit" value = "create">
+        </div>
+        {{ form.csrd_token }}
+</form>
 {% endblock %}
