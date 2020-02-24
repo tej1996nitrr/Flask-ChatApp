@@ -2,7 +2,7 @@ import flask
 from flask import Flask, render_template,redirect,url_for
 from  wtforms_fields import *
 from models import *
-
+from passlib.hash import pbkdf2_sha512
 
 app = Flask(__name__)
 app.secret_key  = "secret"
@@ -15,13 +15,14 @@ def index():
     if reg_form.validate_on_submit():
         username  =reg_form.username.data
         password = reg_form.password.data
-        user = User(username=username,password=password)
+        hashed_pwd = pbkdf2_sha512.hash(password)
+        user = User(username=username,password=hashed_pwd)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('login'))
     return render_template("index.html",form=reg_form)
 
-@app.route('/login')
+@app.route('/login',methods = ["GET","POST"])
 def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
