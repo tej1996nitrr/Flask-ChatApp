@@ -1,5 +1,5 @@
 import flask 
-from flask import Flask, render_template
+from flask import Flask, render_template,redirect,url_for
 from  wtforms_fields import *
 from models import *
 
@@ -15,16 +15,18 @@ def index():
     if reg_form.validate_on_submit():
         username  =reg_form.username.data
         password = reg_form.password.data
-
-        user_object = User.query.filter_by(username = username).first()
-        if user_object:
-            return "Username not available."
         user = User(username=username,password=password)
         db.session.add(user)
         db.session.commit()
-        return "Inserted to DB."
-
+        return redirect(url_for('login'))
     return render_template("index.html",form=reg_form)
+
+@app.route('/login')
+def login():
+    login_form = LoginForm()
+    if login_form.validate_on_submit():
+        return "Logged In "
+    return render_template("login.html",form = login_form)
 
 if __name__=="__main__":
     app.run(debug=True)
