@@ -32,3 +32,4 @@ class LoginForm(FlaskForm):
     password = PasswordField('pwd_field',validators=[InputRequired(message='Password Required'),invalid_credentials ])
     submit_button = SubmitField('Login')
 
+

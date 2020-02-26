@@ -1,8 +1,10 @@
 
-{% from 'form_helper.html' import displayField %}
+{% from 'field-macro.html' import displayField %}
 {% extends "prelogin-layout.html" %}
-{% block title %} Registration1 {% endblock %}
+{% block title %} Registration {% endblock %}
 {% block content %}
+<h2>Get started!</h2>
+        <p>First time here? Register to start using Rchat</p>
 <form action = "{{ url_for('index')}}", method="POST">
     
         
@@ -10,8 +12,11 @@
         {{ displayField(form.password,'Password') }}
         {{ displayField(form.confirm_password,'Retype Password') }}
         <div>
-                {{form.submit_button}}
+                <input type="submit" value="Create" class="btn btn-warning">
         </div>
         {{ form.csrf_token }}
 </form>
+<hr>
+        <p>Already registered? <a href="{{url_for('login')}}">Login here</a>.</p>
+
 {% endblock %}
